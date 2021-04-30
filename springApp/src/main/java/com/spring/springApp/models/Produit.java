@@ -2,8 +2,10 @@ package com.spring.springApp.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,18 +14,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-
+@Table(name = "produit")
 public class Produit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_produit")
     private Long idProduit;
     private String produitName;
     private String description;
@@ -38,7 +42,7 @@ public class Produit implements Serializable {
     private Category category;
     
     @OneToMany(mappedBy = "produit",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Photo> photo;
+    private Set<Photo> photo;
     
 	public Produit() {
 		super();
@@ -111,11 +115,11 @@ public class Produit implements Serializable {
 		this.category = category;
 	}
 
-	public List<Photo> getPhoto() {
+	public Set<Photo> getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(List<Photo> photo) {
+	public void setPhoto(Set<Photo> photo) {
 		this.photo = photo;
 	}
 

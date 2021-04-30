@@ -23,7 +23,7 @@ public class ProduitController {
 	// Autowire the ProduitService class
 	@Autowired
 	ProduitService produitService;
-	
+
 	// creating a get mapping that retrieves all the products detail from the
 	// database
 	@GetMapping("/produit")
@@ -52,6 +52,7 @@ public class ProduitController {
 	@PostMapping("/produits")
 	public ResponseEntity<Long> saveproduit(@RequestBody Produit produits) {
 		produitService.saveOrUpdate(produits);
+//		return produits.getIdProduit();
 		return new ResponseEntity<>(produits.getIdProduit(), HttpStatus.CREATED);
 	}
 

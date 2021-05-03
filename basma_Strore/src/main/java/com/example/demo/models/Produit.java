@@ -1,37 +1,50 @@
-package com.ecommerce.App.models;
+package com.example.demo.models;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Produit {
 
-	private Long idProduit;
-	private String produitName;
-	private String description;
-	private Double prix;
-	private int quantite;
+@Entity
+@Table(name = "produit")
+public class Produit implements Serializable {
 
-	private Category category;
-	private List<Photo> photo;
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_produit")
+    private Long idProduit;
+    private String produitName;
+    private String description;
+    private Double prix;
+    private int quantite;
 
-	@JsonIgnore
-	private Double prixAchat;
-
+    @JsonIgnore
+    private Double prixAchat;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
+    
+    @OneToMany(mappedBy = "produit",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Photo> photo;
+    
 	public Produit() {
 		super();
-	}
-
-	public Produit(String produitName, String description, Double prix, int quantite, Category category,
-			List<Photo> photo, Double prixAchat) {
-		super();
-		this.produitName = produitName;
-		this.description = description;
-		this.prix = prix;
-		this.quantite = quantite;
-		this.category = category;
-		this.photo = photo;
-		this.prixAchat = prixAchat;
 	}
 
 	public Produit(String produitName, String description, Double prix, Double prixAchat, int quantite) {
@@ -75,6 +88,7 @@ public class Produit {
 		this.prix = prix;
 	}
 
+	
 	public Double getPrixAchat() {
 		return prixAchat;
 	}
@@ -82,6 +96,7 @@ public class Produit {
 	public void setPrixAchat(Double prixAchat) {
 		this.prixAchat = prixAchat;
 	}
+
 
 	public int getQuantite() {
 		return quantite;
@@ -99,12 +114,17 @@ public class Produit {
 		this.category = category;
 	}
 
-	public List<Photo> getPhoto() {
+	public Set<Photo> getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(List<Photo> photo) {
+	public void setPhoto(Set<Photo> photo) {
 		this.photo = photo;
 	}
 
+	
+    
+	
+
+  
 }

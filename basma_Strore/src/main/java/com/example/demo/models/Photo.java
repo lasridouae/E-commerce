@@ -1,31 +1,46 @@
-package com.ecommerce.App.models;
+package com.example.demo.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Photo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPhoto;
-	private String PhotoName;
+	private String photoName;
 	private String url;
-	private Produit produit;
+	
+	@ManyToOne
+    @JoinColumn(name = "id_produit")
+    private Produit produit;
 
+	
 	public Photo(String photoName, String url, Produit produit) {
 		super();
-		PhotoName = photoName;
+		this.photoName = photoName;
 		this.url = url;
 		this.produit = produit;
 	}
 
 	public Photo() {
-
+	
 	}
 
 	public Long getIdPhoto() {
 		return idPhoto;
 	}
 
+	
 	public String getUrl() {
 		return url;
 	}
@@ -39,11 +54,11 @@ public class Photo implements Serializable {
 	}
 
 	public String getPhotoName() {
-		return PhotoName;
+		return photoName;
 	}
 
 	public void setPhotoName(String photoName) {
-		PhotoName = photoName;
+		this.photoName = photoName;
 	}
 
 	public Produit getProduit() {
@@ -53,5 +68,6 @@ public class Photo implements Serializable {
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
+	
 
 }

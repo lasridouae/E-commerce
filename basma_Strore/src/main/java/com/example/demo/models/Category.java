@@ -1,16 +1,26 @@
-package com.ecommerce.App.models;
+package com.example.demo.models;
 
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 453241594313385233L;
-	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategory;
     private String nameCategory;
-   
+
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Produit> produit;
     
     public Long getIdCategory() {
@@ -38,12 +48,6 @@ public class Category implements Serializable {
     public Category() {
     }
 
-	public Category(String nameCategory, List<Produit> produit) {
-		super();
-		this.nameCategory = nameCategory;
-		this.produit = produit;
-	}
-
 	public List<Produit> getProduit() {
 		return produit;
 	}
@@ -51,9 +55,5 @@ public class Category implements Serializable {
 	public void setProduit(List<Produit> produit) {
 		this.produit = produit;
 	}
-    
-	
-
-	
     
 }

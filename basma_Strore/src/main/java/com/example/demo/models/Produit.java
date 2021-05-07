@@ -3,30 +3,15 @@ package com.example.demo.models;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Entity
-@Table(name = "produit")
+
 public class Produit implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_produit")
+
     private Long idProduit;
     private String produitName;
     private String description;
@@ -36,11 +21,9 @@ public class Produit implements Serializable {
     @JsonIgnore
     private Double prixAchat;
     
-    @ManyToOne
-    @JoinColumn(name = "id_category")
+  
     private Category category;
     
-    @OneToMany(mappedBy = "produit",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Photo> photo;
     
 	public Produit() {

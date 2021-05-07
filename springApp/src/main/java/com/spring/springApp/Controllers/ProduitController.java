@@ -35,7 +35,7 @@ public class ProduitController {
 
 	// creating a get mapping that retrieves the detail of a specific product
 	@GetMapping("/produit/{idProduit}")
-	public ResponseEntity<Produit> getproduit(@PathVariable("idProduit") Long idProduit) {
+	public ResponseEntity<Produit> findById(@PathVariable Long idProduit) {
 		produitService.getProduitById(idProduit);
 		return new ResponseEntity<>(HttpStatus.OK);
 
@@ -57,9 +57,10 @@ public class ProduitController {
 	}
 
 	// creating put mapping that updates the product detail
-	@PutMapping("/produits")
-	public ResponseEntity<Produit> update(@RequestBody Produit produits) {
-		produitService.saveOrUpdate(produits);
-		return new ResponseEntity<>(produits, HttpStatus.ACCEPTED);
+	@PutMapping("/produits/{idProduit}")
+	public ResponseEntity<Produit> update(@RequestBody Produit produits, @PathVariable Long idProduit) {
+		Produit produit = produitService.update(idProduit,produits);
+		return new ResponseEntity<>(produit, HttpStatus.ACCEPTED);
 	}
+	 
 }

@@ -38,9 +38,11 @@ public class ProduitService {
 		produitRepository.deleteById(id);  
 	}  
 	//updating a record  
-	public void update(Produit produit, Long idProduit)   
-	{  
-		produitRepository.save(produit);  
-	}  
+
+	public Produit update(Long idProduit, Produit produits) {
+		produits.setIdProduit(idProduit);
+        return produitRepository.save(produits);
+	}
+	
 
 }

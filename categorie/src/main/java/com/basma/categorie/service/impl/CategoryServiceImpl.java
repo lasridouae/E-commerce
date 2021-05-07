@@ -34,8 +34,9 @@ public class CategoryServiceImpl  {
 		categoryRepository.deleteById(id);
 	}
 
-	public void update(Category category, Long idCategory) {
-		categoryRepository.save(category);
+	public Category update(Long idCategory, Category category) {
+		category.setIdCategory(idCategory);
+		return categoryRepository.save(category);
 	}
 
 }

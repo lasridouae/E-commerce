@@ -50,10 +50,10 @@ public class PhotoController {
 		}
 
 		
-		@PutMapping("/photos")
-		public ResponseEntity<Photo> update(@RequestBody Photo photos) {
-			photoService.saveOrUpdate(photos);
-			return new ResponseEntity<>(photos, HttpStatus.ACCEPTED);
+		@PutMapping("/photos/{idPhoto}")
+		public ResponseEntity<Photo> update(@RequestBody Photo photos , @PathVariable Long idPhoto)  {
+			Photo photo = photoService.update(idPhoto,photos);
+			return new ResponseEntity<>(photo, HttpStatus.ACCEPTED);
 		}
 	
 

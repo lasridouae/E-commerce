@@ -46,10 +46,10 @@ public class CommandeController {
 		return new ResponseEntity<>(commandes.getIdCommande(), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/commandes")
-	public ResponseEntity<Commande> update(@RequestBody Commande commandes) {
-		commandeService.saveOrUpdate(commandes);
-		return new ResponseEntity<>(commandes, HttpStatus.ACCEPTED);
+	@PutMapping("/commandes/{idCommande}")
+	public ResponseEntity<Commande> update(@RequestBody Commande commandes, @PathVariable Long idCommande) {
+		Commande commande = commandeService.update(idCommande, commandes);
+		return new ResponseEntity<>(commande, HttpStatus.ACCEPTED);
 	}
 
 }

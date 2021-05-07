@@ -36,8 +36,9 @@ public class PhotoService {
 	}
 
 
-	public void update(Photo photo, Long idPhoto) {
-		photoRepository.save(photo);
+	public Photo update(Long idPhoto, Photo photo) {
+		photo.setIdPhoto(idPhoto);
+		return photoRepository.save(photo);
 	}
 
 }

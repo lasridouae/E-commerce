@@ -33,8 +33,9 @@ public class CommandeServiceImp {
 		commandeRepository.deleteById(id);
 	}
 
-	public void update(Commande commande, Long idCommande) {
-		commandeRepository.save(commande);
+	public Commande update(Long idCommande, Commande commande) {
+		commande.setIdCommande(idCommande);
+		return commandeRepository.save(commande);
 	}
 
 }
